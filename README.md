@@ -6,6 +6,9 @@ A pure java library for creating NFC NDEF records, if you're not developing for 
 - Text Records
 - URL Records (http:// and https:// only)
 
+### Limitations
+- Records can only go up to 256 bytes in size.
+- No support for multiple fields in one NDEF record.
 
 ### Using in your project
 it's not fully ready yet so i'll probably put it on maven central sooner or later. for now, you'll need to clone the 

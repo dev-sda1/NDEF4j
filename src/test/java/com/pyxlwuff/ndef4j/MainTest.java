@@ -1,4 +1,4 @@
-package com.pyxlwuff;
+package com.pyxlwuff.ndef4j;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
