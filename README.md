@@ -1,6 +1,6 @@
 # NDEF4j
 
-A pure java library for creating NDEF records, if you're not developing for Android. Wrote this for an [ST25DV16K chip from Adafruit](https://www.adafruit.com/product/4701) after bashing my head against the NFC Type 5 spec for about 4 days. I have no idea if the output from here will work on other NFC tags / chips since I don't have any tags, nor a dedicated reader/writer to check.
+A pure java library for creating NFC NDEF records, if you're not developing for Android. Wrote this for an [ST25DV16K chip from Adafruit](https://www.adafruit.com/product/4701) after bashing my head against the NFC Type 5 spec for about 4 days. I have no idea if the output from here will work on other NFC tags / chips since I don't have any tags, nor a dedicated reader/writer to check.
 
 ### Currently supported:
 - Text Records
