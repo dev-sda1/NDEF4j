@@ -3,6 +3,9 @@ package com.pyxlwuff.ndef4j;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * A URI record in an NDEF message.
+ */
 public class URIRecord {
     private String uriContent = "";
     private int uriProtocol = -1;
@@ -77,15 +80,8 @@ public class URIRecord {
         }
 
         CapabilityContainer cc = new CapabilityContainer();
-        byte[] header = new byte[7];
-
-        header[0] = (byte) 0x03;
-        header[1] = (byte) (uriLength + header.length);
-        header[2] = (byte) 0xD1;
-        header[3] = 0x01;
-        header[4] = (byte) uriLength;
-        header[5] = 0x55;
-        header[6] = (byte) uriProtocol;
+        NDEFHeader genHeader = new NDEFHeader(uriLength, 'U');
+        byte[] header = genHeader.getHeader();
 
         int totalPayloadLength = cc.getCcData().length + header.length + uriLength + 1;
         ByteBuffer ndefRecordBuffer = ByteBuffer.allocate(totalPayloadLength);

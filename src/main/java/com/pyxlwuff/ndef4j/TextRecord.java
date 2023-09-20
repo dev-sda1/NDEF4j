@@ -3,6 +3,9 @@ package com.pyxlwuff.ndef4j;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * A text record in an NDEF message.
+ */
 public class TextRecord {
     private String recordContent = "";
     private String languageCode = "";
@@ -67,15 +70,8 @@ public class TextRecord {
         CapabilityContainer cc = new CapabilityContainer();
 
         // Create NDEF Record Header.
-        byte[] header = new byte[7];
-
-        header[0] = (byte) 0x03;
-        header[1] = (byte) (fullRecordLength + header.length);
-        header[2] = (byte) 0xD1;
-        header[3] = 0x01;
-        header[4] = (byte) fullRecordLength;
-        header[5] = 0x54;
-        header[6] = 0x02;
+        NDEFHeader genHeader = new NDEFHeader(fullRecordLength, 'T');
+        byte[] header = genHeader.getHeader();
 
         byte[] payloadBytes = fullRecord.getBytes(StandardCharsets.UTF_8);
         int totalPayloadLength = cc.getCcData().length + header.length + fullRecord.length() + 1;

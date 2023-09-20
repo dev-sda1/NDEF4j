@@ -1,5 +1,8 @@
 package com.pyxlwuff.ndef4j;
 
+/**
+ * Capability Container for an NDEF record.
+ */
 public class CapabilityContainer {
     final byte[] ccData = new byte[8];
 
@@ -10,7 +13,7 @@ public class CapabilityContainer {
 
         // Set memory size and read/write access
         ccData[2] = 0x00; // Memory size i think (read-only)
-        ccData[3] = 0x01; // lets you write to it?
+        ccData[3] = 0x03; // lets you write to it?
         ccData[4] = 0x00; // Blank values (Reserved for future use).
         ccData[5] = 0x00;
         ccData[6] = 0x01; //// dunno what this does
