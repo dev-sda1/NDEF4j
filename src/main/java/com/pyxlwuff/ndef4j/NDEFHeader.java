@@ -14,7 +14,7 @@ class NDEFHeader {
      * @param recordType The type of record you wish to create. See above for currently supported.
      * @throws IllegalArgumentException If the record type is invalid.
      */
-    NDEFHeader(int recordLength, char recordType) throws IllegalArgumentException{
+    NDEFHeader(int recordLength, char recordType, int uriProtocol) throws IllegalArgumentException{
         header[0] = 0x03;
         header[1] = (byte) (recordLength + header.length);
         header[2] = (byte) 0xD1;
@@ -31,6 +31,10 @@ class NDEFHeader {
                 break;
             default:
                 throw new IllegalArgumentException("Invalid record type.");
+        }
+
+        if(recordType == 'U'){
+            header[6] = (byte) uriProtocol;
         }
     }
 

@@ -6,18 +6,21 @@ package com.pyxlwuff.ndef4j;
 public class CapabilityContainer {
     final byte[] ccData = new byte[8];
 
-    CapabilityContainer(){
+    CapabilityContainer(boolean readOnly){
         // Set magic number and version
         ccData[0] = (byte) 0xE2; // Magic Number
-        ccData[1] = 0x40; // Mapping Version
+        //ccData[1] = 0x40; // Mapping Version
+        ccData[1] = (byte) 0x40; // Mapping Version & Access?
+        ccData[2] = 0x00; // Does Nothing
+        ccData[3] = 0x01; // Additional Feature Information. (Defined as 0x01 Well Known)
+        ccData[4] = 0x00; // This seems to do something not sure what though
+        ccData[5] = 0x00; // Reserved for Future Use
+        ccData[6] = 0x01; // Memory Length (Byte 1)
+        ccData[7] = 0x00; // Memory Length (Byte 2)
 
-        // Set memory size and read/write access
-        ccData[2] = 0x00; // Memory size i think (read-only)
-        ccData[3] = 0x03; // lets you write to it?
-        ccData[4] = 0x00; // Blank values (Reserved for future use).
-        ccData[5] = 0x00;
-        ccData[6] = 0x01; //// dunno what this does
-        ccData[7] = 0x00;
+        if(readOnly){
+            ccData[1] = (byte) 0x43;
+        }
     }
 
     byte[] getCcData(){

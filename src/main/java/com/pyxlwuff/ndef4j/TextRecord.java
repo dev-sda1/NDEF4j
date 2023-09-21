@@ -67,10 +67,10 @@ public class TextRecord {
         }
 
         // Create capability container.
-        CapabilityContainer cc = new CapabilityContainer();
+        CapabilityContainer cc = new CapabilityContainer(true);
 
         // Create NDEF Record Header.
-        NDEFHeader genHeader = new NDEFHeader(fullRecordLength, 'T');
+        NDEFHeader genHeader = new NDEFHeader(fullRecordLength, 'T', -1);
         byte[] header = genHeader.getHeader();
 
         byte[] payloadBytes = fullRecord.getBytes(StandardCharsets.UTF_8);

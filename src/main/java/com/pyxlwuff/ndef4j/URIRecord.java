@@ -79,8 +79,8 @@ public class URIRecord {
             throw new IllegalArgumentException("You haven't set the URI content field or the protocol!");
         }
 
-        CapabilityContainer cc = new CapabilityContainer();
-        NDEFHeader genHeader = new NDEFHeader(uriLength, 'U');
+        CapabilityContainer cc = new CapabilityContainer(true);
+        NDEFHeader genHeader = new NDEFHeader(uriLength, 'U', uriProtocol);
         byte[] header = genHeader.getHeader();
 
         int totalPayloadLength = cc.getCcData().length + header.length + uriLength + 1;
