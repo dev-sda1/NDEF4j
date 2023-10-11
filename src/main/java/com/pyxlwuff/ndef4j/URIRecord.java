@@ -72,7 +72,7 @@ public class URIRecord {
         }
 
         CapabilityContainer cc = new CapabilityContainer(readOnly);
-        NDEFHeader genHeader = new NDEFHeader(uriLength, 'U', (byte) uriProtocol);
+        NDEFHeader genHeader = new NDEFHeader(uriLength);
         byte[] header = genHeader.getHeader();
 
         int totalPayloadLength = cc.getCcData().length + header.length + uriLength + 1;
