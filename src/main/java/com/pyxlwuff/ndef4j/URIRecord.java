@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 public class URIRecord {
     private String uriContent = "";
     private int uriProtocol = -1;
+    private boolean readOnly = false;
 
     // Valid URI Protocols.
     private int[] validHex = {
@@ -25,23 +26,14 @@ public class URIRecord {
      * @param protocol The type of protocol you wish to use.
      * @throws IllegalArgumentException If either the URI or protocol is invalid or missing.
      */
-    public URIRecord(String uri, int protocol) throws IllegalArgumentException{
-        if(uri.isEmpty() || protocol < 0){
+    public URIRecord(String uri, URIRecordTypes protocol, boolean writeProtected) throws IllegalArgumentException{
+        if(uri.isEmpty() || protocol == null){
             throw new IllegalArgumentException("URI input, or protocol input cannot be empty or invalid.");
         }
 
-        boolean isValidProtocol = false;
-        for(int validvalue : validHex){
-            if(protocol == validvalue){
-                isValidProtocol = true;
-                break;
-            }
-        }
-
-        if(!isValidProtocol) { throw new IllegalArgumentException("Specificed Protocol is not a valid URI method."); }
-
         uriContent = uri;
-        uriProtocol = protocol;
+        uriProtocol = protocol.ordinal();
+        readOnly = writeProtected;
     }
 
     /**
@@ -79,8 +71,8 @@ public class URIRecord {
             throw new IllegalArgumentException("You haven't set the URI content field or the protocol!");
         }
 
-        CapabilityContainer cc = new CapabilityContainer(true);
-        NDEFHeader genHeader = new NDEFHeader(uriLength, 'U', uriProtocol);
+        CapabilityContainer cc = new CapabilityContainer(readOnly);
+        NDEFHeader genHeader = new NDEFHeader(uriLength, 'U', (byte) uriProtocol);
         byte[] header = genHeader.getHeader();
 
         int totalPayloadLength = cc.getCcData().length + header.length + uriLength + 1;

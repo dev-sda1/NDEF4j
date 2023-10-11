@@ -9,8 +9,9 @@ import java.nio.charset.StandardCharsets;
 public class TextRecord {
     private String recordContent = "";
     private String languageCode = "";
+    private boolean readOnly = false;
 
-    public TextRecord(String txt, String lang) throws IllegalArgumentException {
+    public TextRecord(String txt, String lang, boolean writeProtected) throws IllegalArgumentException {
         if (txt.isEmpty() || lang.isEmpty()) {
             throw new IllegalArgumentException("Text input or language code cannot be empty.");
         }
@@ -21,6 +22,7 @@ public class TextRecord {
 
         recordContent = txt;
         languageCode = lang;
+        readOnly = writeProtected;
     }
 
     /**
@@ -67,10 +69,10 @@ public class TextRecord {
         }
 
         // Create capability container.
-        CapabilityContainer cc = new CapabilityContainer(true);
+        CapabilityContainer cc = new CapabilityContainer(readOnly);
 
         // Create NDEF Record Header.
-        NDEFHeader genHeader = new NDEFHeader(fullRecordLength, 'T', -1);
+        NDEFHeader genHeader = new NDEFHeader(fullRecordLength, 'T');
         byte[] header = genHeader.getHeader();
 
         byte[] payloadBytes = fullRecord.getBytes(StandardCharsets.UTF_8);
