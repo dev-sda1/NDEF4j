@@ -6,6 +6,9 @@ NDEF4j is a small project I worked on during a placement at my University while 
 - Text Records
 - URI Records
 
+### Usage
+Haven't gotten round to writing this bit yet, but should be fairly straightforward to use.
+
 ### Limitations
 - Records can only go up to 256 bytes in size. (This is probably arbitrary and can be removed)
 - No support for multiple fields in one NDEF record.
