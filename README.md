@@ -7,7 +7,13 @@ NDEF4j is a small project I worked on during a placement at my University while 
 - URI Records
 
 ### Usage
-Haven't gotten round to writing this bit yet, but should be fairly straightforward to use.
+```java
+TextRecord ndefText = new TextRecord("Hello world!", "en", false);
+byte[] ndefTextTest = ndefText.encodeRecord();
+
+URIRecord ndefURI = new URIRecord("https://pyxlwuff.dev", 0x00, false);
+byte[] ndefURITest = ndefURI.encodeRecord();
+```
 
 ### Limitations
 - Records can only go up to 256 bytes in size. (This is probably arbitrary and can be removed)
